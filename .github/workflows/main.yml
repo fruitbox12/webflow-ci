@@ -2,7 +2,8 @@ name: Download and Commit Static HTML Site
 
 on:
   push:
-  
+    branches:
+      - "main"
 
 jobs:
   build:

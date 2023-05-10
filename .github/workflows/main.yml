@@ -1,0 +1,23 @@
+name: Download and Commit Static HTML Site
+
+on:
+  repository_dispatch:
+    types: [webhook-event]
+  
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+
+    - name: Download website
+      run: |
+        wget -N --timestamping --recursive --no-parent --page-requisites --convert-links --restrict-file-names=windows --domains upgoaled.webflow.io --no-host-directories https://upgoaled.webflow.io/goals-challenges/iure
+        
+    - name: Commit and push if it changed
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: Update website
